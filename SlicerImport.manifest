@@ -1,0 +1,13 @@
+{
+	"autodeskProduct":	"Fusion360",
+	"type":	"addin",
+	"id":	"381bf6f8-32f9-4aed-a11a-9c8a3b30ad7d",
+	"author":	"Patrick Rainsberry",
+	"description":	{
+		"":	"Imports a directory of Fusion Slicer output files "
+	},
+	"version":	"1.0",
+	"runOnStartup":	false,
+	"supportedOS":	"windows|mac",
+	"editEnabled":	true
+}
