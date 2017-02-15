@@ -8,6 +8,7 @@ from .Fusion360Utilities import Fusion360Utilities as futil
 from .Fusion360Utilities.Fusion360Utilities import get_app_objects
 from .Fusion360Utilities.Fusion360CommandBase import Fusion360CommandBase
 
+
 # Extract file names of all dxf files in a directory
 def get_dxf_files(directory):
     dxf_files = []
@@ -29,7 +30,6 @@ def get_dxf_files(directory):
 
 # Returns the magnitude of the bounding box in the specified direction
 def get_bb_in_direction(fusion_object, direction_vector):
-
     # Get bounding box extents
     max_point = fusion_object.boundingBox.maxPoint
     min_point = fusion_object.boundingBox.minPoint
@@ -44,7 +44,6 @@ def get_bb_in_direction(fusion_object, direction_vector):
 
 # Transforms an occurrence along a specified vector by a specified amount
 def transform_along_vector(occurrence, direction_vector, magnitude):
-    
     # Create a vector for the translation
     vector = direction_vector.copy()
     vector.scaleBy(magnitude)
@@ -61,7 +60,6 @@ def transform_along_vector(occurrence, direction_vector, magnitude):
 
 # Main class for import command
 class SlicerImportCommand(Fusion360CommandBase):
-
     # Executed on user pressing OK button
     def on_execute(self, command, command_inputs, args, input_values):
 
@@ -95,11 +93,16 @@ class SlicerImportCommand(Fusion360CommandBase):
             # Get sketches
             boundary_sketch = futil.sketch_by_name(sketches, 'boundary')
             frame_sketch = futil.sketch_by_name(sketches, 'frame')
+            hole_sketch = futil.sketch_by_name(sketches, 'hole')
 
             # Extrude boundary layer
-            futil.extrude_all_profiles(boundary_sketch, input_values['distance'], occurrence.component)
+            futil.extrude_all_profiles(boundary_sketch, input_values['distance'], occurrence.component,
+                                       adsk.fusion.FeatureOperations.NewBodyFeatureOperation)
 
-            # todo extrude holes
+            # Extrude Holes if they are present
+            if hole_sketch is not None and input_values['cut_holes']:
+                futil.extrude_all_profiles(hole_sketch, input_values['distance'], occurrence.component,
+                                           adsk.fusion.FeatureOperations.CutFeatureOperation)
 
             # Tight pack vs arrange frames
             if input_values['tight_pack']:
@@ -131,7 +134,6 @@ class SlicerImportCommand(Fusion360CommandBase):
 
             # Move to next row
             if row_count >= input_values['rows']:
-
                 y_magnitude += input_values['spacing']
                 y_magnitude += y_row_max
                 y_row_max = 0.0
@@ -186,3 +188,6 @@ class SlicerImportCommand(Fusion360CommandBase):
 
         # Tight pack?
         command_inputs.addBoolValueInput("tight_pack", 'Tightly pack frames?', True)
+
+        # Cut Holes?
+        command_inputs.addBoolValueInput("cut_holes", 'Cut Holes? (if applicable)', True, '', True)
