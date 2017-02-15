@@ -8,15 +8,6 @@ from .Fusion360Utilities import Fusion360Utilities as futil
 from .Fusion360Utilities.Fusion360Utilities import get_app_objects
 from .Fusion360Utilities.Fusion360CommandBase import Fusion360CommandBase
 
-
-def create_component(target_component, filename):
-    transform = adsk.core.Matrix3D.create()
-    new_occurrence = target_component.occurrences.addNewComponent(transform)
-    new_occurrence.component.name = filename
-
-    return new_occurrence
-
-
 # Extract file names of all dxf files in a directory
 def get_dxf_files(directory):
     dxf_files = []
@@ -95,7 +86,7 @@ class SlicerImportCommand(Fusion360CommandBase):
         for dxf_file in dxf_files:
 
             # Create new component for this DXF file
-            occurrence = create_component(app_objects['root_comp'], dxf_file['name'])
+            occurrence = futil.create_component(app_objects['root_comp'], dxf_file['name'])
 
             # Import all layers of DXF to XY plane
             sketches = futil.import_dxf(dxf_file['full_path'], occurrence.component,
@@ -156,7 +147,8 @@ class SlicerImportCommand(Fusion360CommandBase):
         # Gets necessary application objects
         app_objects = get_app_objects()
 
-        import os
+        app_objects['ui'].messageBox('Browse to the output directory from Fusion Slicer and select any file. \n'
+                                     'All files in the directory will be imported')
 
         # Create file browser dialog box
         file_dialog = app_objects['ui'].createFileDialog()
@@ -165,9 +157,11 @@ class SlicerImportCommand(Fusion360CommandBase):
         file_dialog.isMultiSelectEnabled = False
         file_dialog.title = 'Select any file in the Fusion Slicer Output Directory'
 
+        # Launch file browser
         dialog_results = file_dialog.showOpen()
+
         if dialog_results == adsk.core.DialogResults.DialogOK:
-            default_dir = os.path.dirname(file_dialog.filename)
+            default_dir = os.path.dirname(file_dialog.filename) + '/'
         else:
             default_dir = ''
 
@@ -175,8 +169,8 @@ class SlicerImportCommand(Fusion360CommandBase):
         default_units = app_objects['units_manager'].defaultLengthUnits
 
         # Define that the default values for the command in cm
-        distance_default = adsk.core.ValueInput.createByReal(5)
-        spacing_default = adsk.core.ValueInput.createByReal(1)
+        distance_default = adsk.core.ValueInput.createByReal(.5)
+        spacing_default = adsk.core.ValueInput.createByReal(.5)
 
         # Directory of files to import
         command_inputs.addStringValueInput('directory', 'Output Directory from Make', default_dir)
