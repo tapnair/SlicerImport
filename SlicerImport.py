@@ -10,12 +10,12 @@ command_defs = []
 
 # Define parameters for 1st command #####
 cmd = {
-    'commandName': 'Fusion Slicer Import',
-    'commandDescription': 'Import a directory of outputs from Fusion Make',
-    'commandResources': './resources',
-    'cmdId': 'cmdID_Demo_1',
+    'cmd_name': 'Fusion Slicer Import',
+    'cmd_description': 'Import a directory of outputs from Fusion Make',
+    'cmd_resources': './resources',
+    'cmd_id': 'cmdID_Demo_1',
     'workspace': 'FusionSolidEnvironment',
-    'toolbarPanelID': 'SolidScriptsAddinsPanel',
+    'toolbar_panel_id': 'SolidScriptsAddinsPanel',
     'class': SlicerImportCommand
 }
 
