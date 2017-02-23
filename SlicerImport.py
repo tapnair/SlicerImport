@@ -5,7 +5,7 @@ from .SlicerImportCommand import SlicerImportCommand
 
 
 commands = []
-command_defs = []
+cmd_definitions = []
 
 
 # Define parameters for 1st command #####
@@ -19,23 +19,23 @@ cmd = {
     'class': SlicerImportCommand
 }
 
-command_defs.append(cmd)
+cmd_definitions.append(cmd)
 
 # Set to True to display various useful messages when debugging your app
 debug = False
 
 
 # Don't change anything below here:
-for cmd_def in command_defs:
+for cmd_def in cmd_definitions:
     command = cmd_def['class'](cmd_def, debug)
     commands.append(command)
 
 
 def run(context):
-    for command in commands:
-        command.on_run()
+    for run_command in commands:
+        run_command.on_run()
 
 
 def stop(context):
-    for command in commands:
-        command.on_stop()
+    for stop_command in commands:
+        stop_command.on_stop()
