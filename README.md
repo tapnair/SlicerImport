@@ -2,7 +2,7 @@
 Framework to simplify the creation of Fusion 360 Addin
 
 # Installation
-[Click here to download the Add-in](https://github.com/tapnair/ventMaker/releases/download/V0.1/ventMaker.zip)
+[Click here to download the Add-in](https://github.com/tapnair/SlicerImport/releases/download/0.2/SlicerImport_0_2.zip)
 
 _Note that due to submodules used in this project you need to use the above link to download, unless you are familiar with using terminal commands to pull github repos)_
 
@@ -11,10 +11,11 @@ Follow the [installation instructions here](https://tapnair.github.io/installati
 
 
 
-Documentation to come later. For now:
+
 #Usage
+Documentation to come later. For now:
 Launch Command
-Select any file in the output directory from Slicer
+Select any file in the output directory from Slicer (_this will select the appropriate directory for you_)
 Set the material thickness
 Set the spacing between sheets
 
