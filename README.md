@@ -2,7 +2,7 @@
 Fusion 360 Add-in to import the Slices created by Fusion Slicer.  It will create solid geometry based on the output DXF directory.
 
 # Fusion Slicer
-You can download Fusion Slicer from the [Fusion 360 App store].(https://apps.autodesk.com/FUSION/en/Detail/Index?id=8699194120463301363&appLang=en&os=Mac)
+You can download Fusion Slicer from the [Fusion 360 App store](https://apps.autodesk.com/FUSION/en/Detail/Index?id=8699194120463301363&appLang=en&os=Mac)
 
 Slicer for Autodesk® Fusion 360™ is a tool to turn your digital 3D models into appealing artefacts. It slices and converts 3D models into 2D patterns that you can cut out of any flat material. Slicer for Fusion 360 also creates 3D instructions you can interact with, to help build a model.
  
