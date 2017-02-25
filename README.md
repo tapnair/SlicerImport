@@ -1,6 +1,7 @@
 # SlicerImport
 Fusion 360 Add-in to import the Slices created by Fusion Slicer.  It will create solid geometry based on the output DXF directory.
 
+![Slicer Import](./resources/cover_image.png)
 # Fusion Slicer
 You can download Fusion Slicer from the [Fusion 360 App store](https://apps.autodesk.com/FUSION/en/Detail/Index?id=8699194120463301363&appLang=en&os=Mac)
 
