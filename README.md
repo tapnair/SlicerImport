@@ -15,7 +15,6 @@ Slicer for Fusion 360 can be used as standalone or as an add-in for Fusion, and 
 # Installation
 [Click here to download the Add-in](https://github.com/tapnair/SlicerImport/archive/master.zip)
 
-_Note that due to submodules used in this project you need to use the above link to download, unless you are familiar with using terminal commands to pull github repos_
 
 After downloading the zip file follow the [installation instructions here](https://tapnair.github.io/installation.html) for your particular OS version of Fusion 360 
 
